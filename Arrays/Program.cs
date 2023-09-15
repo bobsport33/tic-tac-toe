@@ -86,9 +86,11 @@ namespace Arrays
                 string userInput = "";
                 Console.WriteLine(messageFromPrevTurn);
                 messageFromPrevTurn = "";
+
+                bool validAnswer = false;
                 // Ask for input
 
-                while (userInput == "")
+                while (!validAnswer)
                 {
                     Console.WriteLine("Player " + playerId + ": Choose your field!");
                     userInput = Console.ReadLine();
@@ -97,7 +99,7 @@ namespace Arrays
                     try
                     {
                         int inputAsInt = Int32.Parse(userInput);
-
+                        validAnswer = true;
                     }
                     catch
                     {
@@ -222,10 +224,31 @@ namespace Arrays
                 Console.WriteLine("It is a draw");
             }
         }
+
+        static void resetGame()
+        {
+            turns = 0;
+            board[0,0] = "1";
+            board[0, 1] = "2";
+            board[0, 2] = "3";
+            board[1, 0] = "4";
+            board[1, 1] = "5";
+            board[1, 2] = "6";
+            board[2, 0] = "7";
+            board[2, 1] = "8";
+            board[2, 2] = "9";
+
+        }
         static void Main(string[] args)
         {
-            playGame();
-            Console.Read();
+            while (true)
+            {
+                playGame();
+                Console.WriteLine("Press any key to play again");
+                Console.Read();
+                resetGame();
+                continue;
+            }
         }
     }
 }
