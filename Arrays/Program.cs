@@ -11,9 +11,10 @@ namespace Arrays
             {"7", "8", "9"}
         };
 
+        static int turns = 0;
+
         static bool checkForWin(string[,] board)
         {
-
             // horizontal check
             for (int i = 0; i < board.GetLength(0); i++)
             {
@@ -30,7 +31,6 @@ namespace Arrays
                     return true;
                 }
             }
-
             // diagnal check
             if (board[0, 0] == board[1, 1] && board[0, 0] == board[2, 2])
             {
@@ -187,6 +187,12 @@ namespace Arrays
                         break;
                 }
 
+                turns++;
+                if (turns == 9)
+                {
+                    break;
+                }
+
                 // redraw board
                 drawBoard(board);
 
@@ -208,7 +214,13 @@ namespace Arrays
             }
             Console.Clear();
             drawBoard(board);
-             Console.WriteLine("The Winner is Player " + playerId);
+            if (turns < 9)
+            {
+                Console.WriteLine("The Winner is Player " + playerId);
+            } else
+            {
+                Console.WriteLine("It is a draw");
+            }
         }
         static void Main(string[] args)
         {
